@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentence Builder</title>
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        .header {
+            width: 100%;
+            padding: 20px;
+            background-color: #757575;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+            background-color: #757575;
+        }
+
+        input {
+            width: 60%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #616161;
+            border-radius: 5px;
+            outline: none;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #616161;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #424242;
+        }
+
+        .table-container {
+            flex: 1;
+            width: 90%;
+            overflow-y: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: black;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #bdbdbd;
+            color: black;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #9e9e9e;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">Sentence Builder</div>
+    <div class="form-container">
+        <form hx-post="/generate" hx-target="#results" hx-swap="beforeend" onsubmit="clearInput()">
+            <input type="text" name="words" id="wordsInput" placeholder="Enter words" required autofocus>
+            <button type="submit">Generate</button>
+        </form>
+    </div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Words</th>
+                    <th>Sentence</th>
+                    <th>Translation</th>
+                </tr>
+            </thead>
+            <tbody id="results">
+                {% for row in data %}
+                <tr>
+                    <td>{{ row.words }}</td>
+                    <td>{{ row.sentence }}</td>
+                    <td>{{ row.translation }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function clearInput() {
+            setTimeout(() => {
+                document.getElementById('wordsInput').value = '';
+                document.getElementById('wordsInput').focus();
+            }, 10);
+        }
+    </script>
+</body>
+
+</html>

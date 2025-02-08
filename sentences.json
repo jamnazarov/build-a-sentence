@@ -1,0 +1,17 @@
+[
+    {
+        "words": "fast, far, cheese",
+        "sentence": "The mouse ran swiftly through the house, hoping to reach the cheese far in the distance.",
+        "translation": "Мышь быстро пробежала по дому, надеясь добраться до сыра далеко на расстоянии."
+    },
+    {
+        "words": "apple, juice, bread",
+        "sentence": "I have a glass of apple juice and a slice of bread for breakfast.",
+        "translation": "У меня есть стакан яблочного сока и кусочек хлеба на завтрак."
+    },
+    {
+        "words": "glass, white, think",
+        "sentence": "I think this white glass is beautiful.",
+        "translation": "Я думаю, что это белое стекло красивое."
+    }
+]
